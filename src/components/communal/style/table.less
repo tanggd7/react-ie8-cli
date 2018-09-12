@@ -1,0 +1,83 @@
+@import '../../../style/variables.less';
+
+.rc-table {
+  // border: 1px solid lighten(@gray-lighter, 40%);
+  border-radius: 4px;
+  cursor: default;
+  th {
+    background-color: #eaf4fa;
+    color: #0077d0;
+    text-align: center;
+  }
+  th,
+  td {
+    padding: 2px 8px;
+    vertical-align: middle;
+    // text-overflow: ellipsis;
+    font-weight: normal;
+    text-align: center;
+    overflow: hidden;
+    word-break: break-all;
+    border: 1px solid @gray-lighter;
+    white-space: initial;
+  }
+  td {
+    color: #222;
+  }
+  .rc-table-scroll {
+    table {
+      width: 0;
+    }
+    .rc-table-fixed {
+      border-collapse: collapse;
+    }
+  }
+}
+
+._checkbox {
+  margin-top: 5px;
+}
+
+.jerry-tr {
+  &:hover {
+    background: lighten(@cyan, 20%) !important;
+  }
+  &:nth-child(even) {
+    background: lighten(@cyan, 33.5%);
+  }
+}
+
+.jerry-tr-selected {
+  &:hover {
+    background: lighten(@cyan, 20%) !important;
+  }
+  background: lighten(@cyan, 20%);
+}
+
+.jerry-table-pager {
+  margin-top: 6px;
+  .rc-pagination-total-text {
+    float: none;
+    line-height: 28px;
+    .jerry-table-pager-total {
+      margin-left: 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+.jerry-table-pager .rc-pagination {
+  padding-left: 0px;
+}
+
+.jerry-table-align-left {
+  text-align: left !important;
+}
+
+.jerry-table-align-center {
+  text-align: center !important;
+}
+
+.jerry-table-align-right {
+  text-align: right !important;
+}
