@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Select, { Option } from 'rc-select';
+import 'rc-select/assets/index.css';
 import './style/select';
 
 export default class JrSelect extends Component {
