@@ -4,7 +4,7 @@
 |--------------------------------------------------
 */
 export default () => {
-  const userAgent = navigator.userAgent; // 取得浏览器的 userAgent 字符串
+  const { userAgent } = navigator; // 取得浏览器的 userAgent 字符串
   const isIE = userAgent.includes('compatible') && userAgent.includes('MSIE'); // 判断是否 IE 浏览器
   if (userAgent.includes('Edge') && !isIE) {
     return 'edge'; // 判断是否 IE 的 Edge 浏览器
@@ -28,7 +28,6 @@ export default () => {
     if (userAgent.includes('MSIE 10.0')) {
       return 10; // IE10
     }
-  } else {
-    return -1;
   }
+  return -1;
 };

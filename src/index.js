@@ -5,13 +5,13 @@
 */
 
 // 热加载
-if (module.hot) {
-  module.hot.accept();
-}
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './router';
 import './style/style.less';
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));

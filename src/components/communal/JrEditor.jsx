@@ -1,18 +1,38 @@
+/**
+ * @author 方磊 2018-09-18 10:39:30
+ * @deprecated 富文本
+ */
 import React, { Component, PropTypes } from 'react';
 import CKEditor from 'ui/CKEditor';
 import './style/editor.less';
 
 export default class JrEditor extends Component {
+  static propTypes = {
+    onChange: PropTypes.func, // value：富文本值
+    onBlur: PropTypes.func, // value：富文本值
+    content: PropTypes.string, // 编辑器初始值
+  };
+
+  static defaultProps = {
+    onChange: null,
+    onBlur: null,
+    content: null,
+  };
+
   onChange = evt => {
-    if (this.props.onChange) {
-      this.props.onChange(evt.editor.getData());
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(evt.editor.getData());
     }
   };
+
   onBlur = evt => {
-    if (this.props.onBlur) {
-      this.props.onBlur(evt.editor.getData());
+    const { onBlur } = this.props;
+    if (onBlur) {
+      onBlur(evt.editor.getData());
     }
   };
+
   render() {
     const { content } = this.props;
     return (
@@ -42,9 +62,3 @@ export default class JrEditor extends Component {
     );
   }
 }
-
-JrEditor.propTypes = {
-  onChange: PropTypes.func, // value：富文本值
-  onBlur: PropTypes.func, // value：富文本值
-  content: PropTypes.string, //编辑器初始值
-};

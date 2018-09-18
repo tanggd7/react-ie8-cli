@@ -8,17 +8,17 @@ import iconError from 'static/icons/icon-error.png';
 import './style/message';
 
 let notification = null;
-!notification &&
-  Notification.newInstance(
-    { prefixCls: 'jerry-message', style: {} },
-    n => (notification = n)
-  );
+if (!notification) {
+  Notification.newInstance({ prefixCls: 'jerry-message', style: {} }, n => {
+    notification = n;
+  });
+}
 
 const notice = (content, onClose, icon, duration = 2) => {
   notification.notice({
     content: (
       <span>
-        <img src={icon} />
+        <img src={icon} alt="" />
         <span>{content}</span>
       </span>
     ),

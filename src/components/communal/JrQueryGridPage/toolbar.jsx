@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { request, apiUrl } from 'tool';
 import JrMessage from '../JrMessage';
 import Button from '../Button';
-import { request, apiUrl } from 'tool';
 
 const { MENU_USERMENU_BUTTONS } = apiUrl;
 
@@ -14,11 +14,6 @@ const defaultToolbarState = {
 };
 
 class Toolbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...defaultToolbarState, toolbar: [] };
-  }
-
   static propTypes = {
     menucode: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     toolbar: PropTypes.array,
@@ -28,41 +23,47 @@ class Toolbar extends Component {
   };
 
   static defaultProps = {
+    menucode: '',
+    toolbar: [],
     reloadGrid: () => {},
     getSelectRows: () => {},
     getConditions: () => {},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { ...defaultToolbarState, toolbar: [] };
+  }
+
   componentWillMount = () => {
     const { menucode, toolbar } = this.props;
     // 如果传入 menucode 则查询接口查看当前用户能显示出的按钮。
     if (!!menucode && !!toolbar) {
-      request
-        .get(MENU_USERMENU_BUTTONS(this.props.menucode))
-        .then(({ entity }) => {
-          const allUserToolCodes = new Map(
-            entity.map(value => {
-              return [value.buttoncode, value.buttonname];
-            })
-          );
-          const userToolbar = [];
-          for (const toolObj of toolbar) {
-            if (allUserToolCodes.has(toolObj.code)) {
-              toolObj.title = allUserToolCodes.get(toolObj.code);
-              userToolbar.push(toolObj);
-            }
+      request.get(MENU_USERMENU_BUTTONS(menucode)).then(({ entity }) => {
+        const allUserToolCodes = new Map(
+          entity.map(value => [value.buttoncode, value.buttonname])
+        );
+
+        const userToolbar = [];
+        toolbar.forEach(toolObj => {
+          if (allUserToolCodes.has(toolObj.code)) {
+            const obj = Object.assign({}, toolObj);
+            obj.title = allUserToolCodes.get(toolObj.code);
+            userToolbar.push(obj);
           }
-          this.setState({ toolbar: userToolbar });
         });
+        this.setState({ toolbar: userToolbar });
+      });
     } else {
       // 如果没有传入 menucode 就显示所有按钮
-      this.setState({ toolbar: this.props.toolbar });
+      this.setState({ toolbar });
     }
   };
 
   // 销毁按钮组件
   destroy = () => {
-    this.setState({ ...defaultToolbarState, toolbar: this.state.toolbar });
+    const { toolbar } = this.state;
+    this.setState({ ...defaultToolbarState, toolbar });
   };
 
   render() {
@@ -72,9 +73,10 @@ class Toolbar extends Component {
       !!toolbar && (
         <div className="jerry-qg-toolbar">
           {toolbar.map((curr, index) => {
+            const key = `toolbar-${index}`;
             return (
               <Button
-                key={`toolbar-${index}`}
+                key={key}
                 type="info"
                 onClick={() => {
                   const selectRows = getSelectRows();

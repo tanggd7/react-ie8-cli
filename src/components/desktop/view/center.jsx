@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { onTabChange, onActiveKeyChange } from '../ducks';
 import ClosePng from 'static/imgs/close.png';
-
 import Tabs, { TabPane } from 'rc-tabs';
 import TabContent from 'rc-tabs/lib/TabContent';
 import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import 'rc-tabs/assets/index.css';
+import { tabChange, activeKeyChange } from '../ducks';
 
 const initTabs = [
   {
@@ -24,18 +23,26 @@ class Center extends Component {
     onActiveKeyChange: PropTypes.func.isRequired,
   };
 
+  static defaultProps = {
+    tabs: [],
+    activeKey: '',
+  };
+
   componentDidMount = () => {
-    this.props.onTabChange(initTabs);
-    this.props.onActiveKeyChange('index');
+    const { onTabChange, onActiveKeyChange } = this.props;
+    onTabChange(initTabs);
+    onActiveKeyChange('index');
   };
 
   onChange = activeKey => {
-    this.props.onActiveKeyChange(activeKey);
+    const { onActiveKeyChange } = this.props;
+    onActiveKeyChange(activeKey);
   };
 
   remove = code => {
+    const { tabs, activeKey, onTabChange, onActiveKeyChange } = this.props;
+
     let foundIndex = 0;
-    let tabs = this.props.tabs;
     const after = tabs.filter((t, i) => {
       if (t.code !== code) {
         return true;
@@ -43,51 +50,50 @@ class Center extends Component {
       foundIndex = i;
       return false;
     });
-    let activeKey = this.props.activeKey;
-    if (activeKey === code) {
+    let aKey = activeKey;
+    if (aKey === code) {
       if (foundIndex) {
-        foundIndex--;
+        foundIndex -= 1;
       }
-      activeKey = after[foundIndex].code;
+      aKey = after[foundIndex].code;
     }
-    this.props.onTabChange(after);
-    this.props.onActiveKeyChange(activeKey);
+    onTabChange(after);
+    onActiveKeyChange(activeKey);
   };
 
   render() {
+    const { activeKey, tabs } = this.props;
     return (
       <div>
         <Tabs
           renderTabBar={() => <ScrollableInkTabBar />}
           renderTabContent={() => <TabContent animated={false} />}
-          activeKey={this.props.activeKey}
+          activeKey={activeKey}
           onChange={this.onChange}
         >
-          {!!this.props.tabs &&
-            this.props.tabs.map(tab => {
-              return (
-                <TabPane
-                  tab={
-                    <span>
-                      {tab.name}
-                      {tab.name !== '首页' && (
-                        <a
-                          className="close_tab"
-                          onClick={() => {
-                            this.remove(tab.code);
-                          }}
-                        >
-                          <img src={ClosePng} />
-                        </a>
-                      )}
-                    </span>
-                  }
-                  key={tab.code}
-                >
-                  <div>{tab.content}</div>
-                </TabPane>
-              );
-            })}
+          {tabs.map(tab => (
+            <TabPane
+              tab={
+                <span>
+                  {tab.name}
+                  {tab.name !== '首页' && (
+                    <button
+                      type="button"
+                      className="close_tab"
+                      onClick={() => {
+                        this.remove(tab.code);
+                      }}
+                    >
+                      <img src={ClosePng} alt="" />
+                    </button>
+                  )}
+                </span>
+              }
+              key={tab.code}
+            >
+              <div>{tab.content}</div>
+            </TabPane>
+          ))}
         </Tabs>
       </div>
     );
@@ -99,7 +105,10 @@ const mapStateToProps = state => ({
   activeKey: state.desktop.activeKey,
 });
 
-const mapDispatchToProps = { onTabChange, onActiveKeyChange };
+const mapDispatchToProps = {
+  onTabChange: tabChange,
+  onActiveKeyChange: activeKeyChange,
+};
 
 export default connect(
   mapStateToProps,

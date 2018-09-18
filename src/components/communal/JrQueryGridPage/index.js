@@ -1,3 +1,7 @@
+/**
+ * @author 汤国栋 2018-09-17 14:50:31
+ * @deprecated 查询列表组件（查询条件、工具栏、表格列表）
+ */
 import React, { Component, PropTypes } from 'react';
 import Condition from './condition';
 import Toolbar from './toolbar';
@@ -5,13 +9,6 @@ import JrGrid from '../JrGrid';
 import './index.less';
 
 class JrQueryGridPage extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.selectRows = [];
-    this.currentPage = 1;
-    this.form = {};
-  }
-
   static propTypes = {
     columns: PropTypes.array.isRequired, // 表格参数
     data: PropTypes.array.isRequired, // 表格数据
@@ -23,6 +20,21 @@ class JrQueryGridPage extends Component {
     singleCheck: PropTypes.bool, // 单选中行
     loadData: PropTypes.func.isRequired, // 加载表格数据
   };
+
+  static defaultProps = {
+    conditions: [],
+    advancedConditions: [],
+    toolbar: [],
+    menucode: '',
+    singleCheck: false,
+  };
+
+  constructor(props, context) {
+    super(props, context);
+    this.selectRows = [];
+    this.currentPage = 1;
+    this.form = {};
+  }
 
   onInitGrid = gridObj => {
     this.gridObj = gridObj;
@@ -41,18 +53,15 @@ class JrQueryGridPage extends Component {
   };
 
   loadData = (currentPage, pageSize, form) => {
-    this.props.loadData(currentPage, pageSize, form);
+    const { loadData } = this.props;
+    loadData(currentPage, pageSize, form);
   };
 
   // 获取选中行数据
-  getSelectRows = () => {
-    return this.selectRows;
-  };
+  getSelectRows = () => this.selectRows;
 
   // 获取查询条件
-  getConditions = () => {
-    return this.form;
-  };
+  getConditions = () => this.form;
 
   render() {
     const {

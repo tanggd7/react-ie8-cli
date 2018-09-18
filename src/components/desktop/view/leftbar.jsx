@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { JrTree } from 'ui';
-import { apiUrl, request } from 'tool';
-import { onTabChange, onActiveKeyChange } from '../ducks';
+// import { apiUrl, request } from 'tool';
+import { tabChange, activeKeyChange } from '../ducks';
 
 // const {} = apiUrl;
 
 // 创建菜单树
 const creatMenuTree = (data, nodes = []) => {
   if (data) {
-    data.map(item => {
+    data.forEach(item => {
       let obj = {};
       if (item.menus.length > 0) {
         obj = {
@@ -33,20 +33,18 @@ const creatMenuTree = (data, nodes = []) => {
 // 根据 key，递归查找对应菜单内容。
 const findItem = (arr, code) => {
   let result;
-  for (const item of arr) {
+  arr.forEach(item => {
     if (!result) {
       if (item.menucode === code) {
         result = item;
-        break;
-      }
-      if (item.menus.length > 0) {
-        const _result = findItem(item.menus, code);
-        if (_result) {
-          result = _result;
+      } else if (item.menus.length > 0) {
+        const r = findItem(item.menus, code);
+        if (r) {
+          result = r;
         }
       }
     }
-  }
+  });
   return result;
 };
 
@@ -57,11 +55,16 @@ class Leftbar extends Component {
     onActiveKeyChange: PropTypes.func.isRequired,
   };
 
+  static defaultProps = {
+    tabs: [],
+  };
+
   constructor(props) {
     super(props);
+
     this.state = {
-      selectedKeys: '',
-      menuList: [], //菜单列表
+      // selectedKeys: '',
+      menuList: [], // 菜单列表
       menuNodes: [], // 菜单树
       userName: '测试', // 用户姓名
       unitName: '测试单位', // 单位名称
@@ -70,14 +73,17 @@ class Leftbar extends Component {
 
   componentDidMount = () => {
     // TODO: 调用接口获取 menuList
-    this.setState({ menuNodes: creatMenuTree(this.state.menuList) });
+    const { menuList } = this.state;
+    this.setState({ menuNodes: creatMenuTree(menuList) });
   };
 
   onRbSelect = treeNode => {
+    // TODO: 保存 selectedKeys
     const selectedKeys = treeNode.id;
-    this.setState({ selectedKeys });
+    // this.setState({ selectedKeys });
 
-    const item = findItem(this.state.menuList, selectedKeys.toString());
+    const { menuList } = this.state;
+    const item = findItem(menuList, selectedKeys.toString());
     if (item) {
       const { menuname, menucode, menus } = item;
       if (!menus.length) {
@@ -86,17 +92,18 @@ class Leftbar extends Component {
         const newTab = {
           name: menuname,
           code: menucode,
-          content: content ? content : menuname,
+          content: content || menuname,
         };
 
-        //判断 tabs 内是否已存在相同 key
-        const activeTab = this.props.tabs.filter(obj => obj.code === menucode);
+        // 判断 tabs 内是否已存在相同 key
+        const { tabs, onTabChange, onActiveKeyChange } = this.props;
+        const activeTab = tabs.filter(obj => obj.code === menucode);
         if (!activeTab.length) {
-          this.props.onTabChange(this.props.tabs.concat(newTab));
+          onTabChange(tabs.concat(newTab));
         }
 
         // 保存当前选中标签页
-        this.props.onActiveKeyChange(newTab.code);
+        onActiveKeyChange(newTab.code);
       }
     }
   };
@@ -138,7 +145,10 @@ const mapStateToProps = state => ({
   tabs: state.desktop.tabs,
 });
 
-const mapDispatchToProps = { onTabChange, onActiveKeyChange };
+const mapDispatchToProps = {
+  onTabChange: tabChange,
+  onActiveKeyChange: activeKeyChange,
+};
 
 export default connect(
   mapStateToProps,

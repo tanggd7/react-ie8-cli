@@ -12,8 +12,8 @@
   text-align: left;
 }
 
-.mmGrid input[type='radio'],
-.mmGrid input[type='checkbox'] {
+.mmGrid input[type="radio"],
+.mmGrid input[type="checkbox"] {
   margin: 0;
 }
 
@@ -31,7 +31,7 @@
 /* 半透明 */
 .mmGrid .mmg-transparent {
   /* IE 8 */
-  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   /* IE 5-7 */
   filter: alpha(opacity=50);
   /* Netscape */

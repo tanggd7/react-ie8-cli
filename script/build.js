@@ -11,7 +11,10 @@ const creatCompiler = require('./config/webpackCompiler');
 const paths = require('./paths');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 //   .BundleAnalyzerPlugin;
+
+/* eslint-disable no-console */
 const clog = console.log;
+/* eslint-enable no-console */
 
 process.env.NODE_ENV = 'production';
 

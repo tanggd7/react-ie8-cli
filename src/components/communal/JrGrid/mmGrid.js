@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default $ => {
   let MMGrid = function(element, options) {
     this._id = (((1 + Math.random()) * 0x10000) | 0).toString(16);
@@ -1431,6 +1432,11 @@ export default $ => {
         this._insertEmptyRow();
       }
     },
+
+    // 2018-9-17 汤国栋 添加显示遮罩方法
+    showLoading: function() {
+      this._showLoading();
+    },
   };
 
   $.fn.mmGrid = function() {
@@ -1519,3 +1525,4 @@ export default $ => {
     };
   })();
 };
+/* eslint-enable */

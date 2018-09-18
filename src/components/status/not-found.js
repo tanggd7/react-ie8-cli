@@ -4,7 +4,7 @@
  */
 import React, { Component } from 'react';
 import { response } from 'tool';
-import { Button } from 'ui';
+import { JrButton } from 'ui';
 import './index.less';
 
 export default class NotFound extends Component {
@@ -17,9 +17,9 @@ export default class NotFound extends Component {
       <div className="jerry-notfound">
         <h1>404</h1>
         <div className="jerry-notfound-explain">抱歉，你访问的页面不存在！</div>
-        <Button type="primary" onClick={this.onClickBack}>
+        <JrButton type="primary" onClick={this.onClickBack}>
           返 回
-        </Button>
+        </JrButton>
       </div>
     );
   }

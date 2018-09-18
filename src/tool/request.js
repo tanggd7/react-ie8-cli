@@ -4,9 +4,9 @@
 |--------------------------------------------------
 */
 import axios from 'axios';
+import { JrMessage } from 'ui';
 import { SUCCESS } from './http-code';
 import response from './response';
-import { JrMessage } from 'ui';
 
 const AJAX_TIMEOUT = 'ECONNABORTED';
 
@@ -50,19 +50,17 @@ const newRequest = (url, params, method, onError) =>
   });
 
 const request = ({ url = '', param = {}, method = 'get', onError }) => {
-  method = method.toLowerCase();
-  if (method === 'get') {
-    return newRequest(url, { params: param }, 'get', onError);
-  }
-  if (method === 'post') {
+  const Method = method.toLowerCase();
+  if (Method === 'post') {
     return newRequest(url, { data: param }, 'post', onError);
   }
-  if (method === 'put') {
+  if (Method === 'put') {
     return newRequest(url, { data: param }, 'put', onError);
   }
-  if (method === 'delete') {
+  if (Method === 'delete') {
     return newRequest(url, { params: param }, 'delete', onError);
   }
+  return newRequest(url, { params: param }, 'get', onError); // 默认 Get 请求
 };
 
 request.get = (url, param, onError) =>

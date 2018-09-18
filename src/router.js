@@ -12,13 +12,11 @@ import * as pages from './pages';
 const prePath = '';
 
 export default class AppRouter extends React.Component {
-  createComponent(Component, props) {
-    return (
-      <Provider store={store}>
-        <Component {...props} />
-      </Provider>
-    );
-  }
+  createComponent = (Component, props) => (
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>
+  );
 
   render() {
     return (

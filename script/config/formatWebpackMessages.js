@@ -1,4 +1,4 @@
-const formatMessage = (message, isError) => {
+const formatMessage = message => {
   let lines = message.split('\n');
 
   // 删除多余的换行符
@@ -18,18 +18,12 @@ const formatMessage = (message, isError) => {
   return lines.join('\n');
 };
 
-const getFormatMessage = isError => {
-  return message => {
-    return formatMessage(message, isError);
-  };
-};
+const getFormatMessage = isError => message => formatMessage(message, isError);
 
 // 格式化 webpack 错误和警告信息
-const formatWebpackMessages = json => {
-  return {
-    errors: json.errors.map(getFormatMessage(true)),
-    warnings: json.warnings.map(getFormatMessage(false)),
-  };
-};
+const formatWebpackMessages = json => ({
+  errors: json.errors.map(getFormatMessage(true)),
+  warnings: json.warnings.map(getFormatMessage(false)),
+});
 
 module.exports = formatWebpackMessages;

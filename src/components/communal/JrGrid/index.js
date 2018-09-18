@@ -14,19 +14,6 @@ MMGrid(jquery); // 初始化表格
 MMPaginator(jquery); // 初始化分页
 
 class JrGrid extends Component {
-  constructor(props) {
-    super(props);
-
-    const id = Math.random()
-      .toString()
-      .replace('.', '');
-    this.state = {
-      tableId: `table-${id}`,
-      pgId: `pg-${id}`,
-      tableObj: null,
-    };
-  }
-
   static propTypes = {
     cols: PropTypes.array.isRequired, // 表格参数
     data: PropTypes.array.isRequired, // 表格数据
@@ -46,9 +33,6 @@ class JrGrid extends Component {
   };
 
   static defaultProps = {
-    cols: [],
-    data: [],
-    total: 0,
     currentPage: 1,
     pageSize: 20,
     loadonce: false,
@@ -61,6 +45,19 @@ class JrGrid extends Component {
     width: 'auto',
     onInit: () => {},
   };
+
+  constructor(props) {
+    super(props);
+
+    const id = Math.random()
+      .toString()
+      .replace('.', '');
+    this.state = {
+      tableId: `table-${id}`,
+      pgId: `pg-${id}`,
+      tableObj: null,
+    };
+  }
 
   componentDidMount = () => {
     const { tableId, pgId } = this.state;
@@ -88,8 +85,8 @@ class JrGrid extends Component {
       height,
       width,
     };
-    showPagination &&
-      (config.plugins = [
+    if (showPagination) {
+      config.plugins = [
         jquery(`#${pgId}`).mmPaginator({
           page: currentPage,
           local: true,
@@ -99,12 +96,14 @@ class JrGrid extends Component {
             if (loadonce) {
               this.loadonceForPagination(number, size);
             } else {
-              this.state.tableObj._showLoading();
+              const { tableObj } = this.state;
+              tableObj.showLoading();
               onCurrentPageOrSizeChange(number, size);
             }
           },
         }),
-      ]);
+      ];
+    }
     const tableObj = jquery(`#${tableId}`).mmGrid(config);
 
     // 初始化后，返回表操作方法。
@@ -115,7 +114,8 @@ class JrGrid extends Component {
 
   // 更新表格数据
   componentWillReceiveProps = nextProps => {
-    this.state.tableObj.load(nextProps.data, {
+    const { tableObj } = this.state;
+    tableObj.load(nextProps.data, {
       currentPage: nextProps.currentPage,
     });
   };
@@ -124,7 +124,9 @@ class JrGrid extends Component {
   loadonceForPagination = (number, size) => {
     const start = (number - 1) * size;
     const end = start + size;
-    this.state.tableObj.load(this.props.data.slice(start, end));
+    const { tableObj } = this.state;
+    const { data } = this.props;
+    tableObj.load(data.slice(start, end));
   };
 
   render() {

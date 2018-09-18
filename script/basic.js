@@ -12,7 +12,9 @@ const basicConfig = {
     },
     modules: ['node_modules', paths.appSrc],
   },
-  externals: { jquery: 'jQuery' },
+  externals: {
+    jquery: 'jQuery',
+  },
   module: {
     postLoaders: [
       {
@@ -51,13 +53,11 @@ const basicConfig = {
       },
     ],
   },
-  postcss: () => {
-    return [
-      autoprefixer({
-        browsers: ['last 2 versions', 'safari >= 7', 'ie >= 8'],
-      }),
-    ];
-  },
+  postcss: () => [
+    autoprefixer({
+      browsers: ['last 2 versions', 'safari >= 7', 'ie >= 8'],
+    }),
+  ],
 };
 
 module.exports = basicConfig;

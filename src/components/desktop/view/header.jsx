@@ -14,21 +14,27 @@ export default class Header extends Component {
         <div className="header">
           <div className="header_logo">
             <span>
-              <img src={Logo} />
+              <img src={Logo} alt="" />
             </span>
             <span className="title">工业底片数字化智能云平台</span>
           </div>
           <div className="right_link">
             <span>
-              <a onClick={this.editPersonInfo}>信息修改</a>
+              <button type="button" onClick={this.editPersonInfo}>
+                信息修改
+              </button>
             </span>
             <span> - </span>
             <span>
-              <a onClick={this.editPassword}>密码修改</a>
+              <button type="button" onClick={this.editPassword}>
+                密码修改
+              </button>
             </span>
             <span> - </span>
             <span>
-              <a onClick={this.logOut}>退出</a>
+              <button type="button" onClick={this.logOut}>
+                退出
+              </button>
             </span>
           </div>
         </div>

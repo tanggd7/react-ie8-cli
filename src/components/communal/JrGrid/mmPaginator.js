@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default $ => {
   let MMPaginator = function(element, options) {
     this.$el = $(element);
@@ -296,3 +297,4 @@ export default $ => {
 
   $.fn.mmPaginator.Constructor = MMPaginator;
 };
+/* eslint-enable */

@@ -2,13 +2,16 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpackDevServer = require('webpack-dev-server');
+const WebpackDevServer = require('webpack-dev-server');
 const basicConfig = require('./basic');
 const creatCompiler = require('./config/webpackCompiler');
 const choosePort = require('./config/choosePort');
 const proxy = require('./proxy');
 const paths = require('./paths');
+
+/* eslint-disable no-console */
 const clog = console.log;
+/* eslint-enable no-console */
 
 process.env.NODE_ENV = 'development';
 
@@ -82,11 +85,11 @@ choosePort(PORT).then(port => {
   }
 
   const compiler = creatCompiler(webpack, webpackConfig);
-  const devServer = new webpackDevServer(compiler, {
+  const devServer = new WebpackDevServer(compiler, {
     // contentBase: resolve(__dirname, 'dev'), // 告诉服务器从哪里提供内容，只有在你想要提供静态文件时才需要。
     publicPath: '/', // 此路径下的打包文件可在浏览器中访问
     host: '0.0.0.0', // 指定使用一个 host
-    port: port, // 监听端口
+    port, // 监听端口
     hot: true, // 启用 webpack 的模块热替换特性
     overlay: true, // 当出现编译错误或警告时，在浏览器中显示一个全屏覆盖。
     compress: true, // 一切服务都启用 gzip 压缩

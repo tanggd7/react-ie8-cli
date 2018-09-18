@@ -4,3 +4,4 @@
 |--------------------------------------------------
 */
 export const PATH_PRE = '';
+export const test = '';

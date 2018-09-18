@@ -1,7 +1,10 @@
 const chalk = require('chalk');
 const clearConsole = require('./clearConsole');
 const formatWebpackMessages = require('./formatWebpackMessages');
+
+/* eslint-disable no-console */
 const clog = console.log;
+/* eslint-enable no-console */
 
 // 用户的 shell
 const isInteractive = process.stdout.isTTY;
@@ -25,11 +28,13 @@ const compilerOnDone = stats => {
 
   const messages = formatWebpackMessages(stats.toJson());
 
-  !stats.hasErrors() && !stats.hasWarnings()
-    ? clog(chalk.green('编译成功'))
-    : stats.hasErrors()
-      ? showErrors(messages)
-      : showWarning(messages);
+  if (!stats.hasErrors() && !stats.hasWarnings()) {
+    clog(chalk.green('编译成功'));
+  } else if (stats.hasErrors()) {
+    showErrors(messages);
+  } else {
+    showWarning(messages);
+  }
 };
 
 // 创建编译器
@@ -44,7 +49,7 @@ const creatCompiler = (webpack, webpackConfig) => {
   }
 
   // 编译中
-  compiler.plugin('compile', function() {
+  compiler.plugin('compile', () => {
     clog(chalk.blue('正在编译...'));
   });
 

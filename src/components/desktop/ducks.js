@@ -5,13 +5,12 @@
 const TAB_CHANGE = 'desktop/tabChange';
 const ACTIVE_KEY_CHANGE = 'desktop/activeKeyChange';
 
-export const onTabChange = tabs => {
-  return { type: TAB_CHANGE, tabs };
-};
+export const tabChange = tabs => ({ type: TAB_CHANGE, tabs });
 
-export const onActiveKeyChange = activeKey => {
-  return { type: ACTIVE_KEY_CHANGE, activeKey };
-};
+export const activeKeyChange = activeKey => ({
+  type: ACTIVE_KEY_CHANGE,
+  activeKey,
+});
 
 export default (state = {}, action = {}) => {
   const { type, ...other } = action;
