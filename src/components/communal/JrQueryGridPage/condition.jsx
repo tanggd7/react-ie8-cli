@@ -3,10 +3,10 @@ import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import 'rc-calendar/assets/index.css';
-import Input from '../Input';
+import JrInput from '../JrInput';
 import JrSelect from '../JrSelect';
 import JrPanel from '../JrPanel';
-import Button from '../Button';
+import JrButton from '../JrButton';
 import './index.less';
 
 const format = 'YYYY-MM-DD'; // 查询列表日期组件格式化格式
@@ -50,7 +50,7 @@ class Condition extends Component {
     }
     if (type === 'input') {
       return (
-        <Input
+        <JrInput
           style={{ width }}
           name={name}
           onChange={this.onChangeValue}
@@ -82,7 +82,7 @@ class Condition extends Component {
         >
           {({ value }) => (
             <span>
-              <Input
+              <JrInput
                 readOnly
                 style={{ width }}
                 tabIndex="-1"
@@ -173,7 +173,7 @@ class Condition extends Component {
             <span>
               搜索条件
               {advancedConditions.length > 0 && (
-                <Button
+                <JrButton
                   onClick={() => {
                     this.switchCondition();
                   }}
@@ -182,7 +182,7 @@ class Condition extends Component {
                     {switchCondition ? '- ' : '+ '}
                   </span>
                   高级搜索
-                </Button>
+                </JrButton>
               )}
             </span>
           )}
@@ -192,16 +192,16 @@ class Condition extends Component {
               {this.createAdvancedConditions()}
               <div className="jerry-qg-cd-cell">
                 <div className="jerry-qg-cd-search">
-                  <Button
+                  <JrButton
                     className="jerry-qg-cd-btn"
                     type="primary"
                     onClick={this.search}
                   >
                     查&nbsp;&nbsp;询
-                  </Button>
-                  <Button className="jerry-qg-cd-a" onClick={onRefreshClick}>
+                  </JrButton>
+                  <JrButton className="jerry-qg-cd-a" onClick={onRefreshClick}>
                     刷&nbsp;&nbsp;新
-                  </Button>
+                  </JrButton>
                 </div>
               </div>
             </div>

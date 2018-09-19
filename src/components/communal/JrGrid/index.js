@@ -2,6 +2,7 @@
  * @author 汤国栋 2018-09-11 08:41:02
  * @deprecated 表格组件
  */
+/* eslint import/no-extraneous-dependencies: 0 */
 import React, { Component, PropTypes } from 'react';
 import jquery from 'jquery';
 import MMGrid from './mmGrid';

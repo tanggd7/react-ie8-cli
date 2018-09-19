@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { request, apiUrl } from 'tool';
 import JrMessage from '../JrMessage';
-import Button from '../Button';
+import JrButton from '../JrButton';
 
 const { MENU_USERMENU_BUTTONS } = apiUrl;
 
@@ -75,7 +75,7 @@ class Toolbar extends Component {
           {toolbar.map((curr, index) => {
             const key = `toolbar-${index}`;
             return (
-              <Button
+              <JrButton
                 key={key}
                 type="info"
                 onClick={() => {
@@ -111,7 +111,7 @@ class Toolbar extends Component {
                 }}
               >
                 {curr.title}
-              </Button>
+              </JrButton>
             );
           })}
           {visible &&
