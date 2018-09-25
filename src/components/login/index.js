@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { createForm } from 'rc-form';
 import { JrInput, JrButton, JrCheckbox } from 'ui';
 import { response } from 'tool';
@@ -28,8 +29,6 @@ class Login extends Component {
   remember = e => {
     this.rememberPassword = e.target.checked;
   };
-
-  forgot = () => {};
 
   getError = name => {
     const { form } = this.props;
@@ -74,13 +73,9 @@ class Login extends Component {
           <div className="login-wapper">
             <JrCheckbox onChange={this.remember}>记住密码</JrCheckbox>
             &nbsp;&nbsp;
-            <button
-              type="button"
-              className="login-forget"
-              onClick={this.forgot}
-            >
+            <Link to="/forget" className="login-forget">
               忘记密码
-            </button>
+            </Link>
           </div>
           <JrButton onClick={this.submit} className="login-btn" type="primary">
             登录
