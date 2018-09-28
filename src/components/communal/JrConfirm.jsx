@@ -11,7 +11,7 @@ import iconWarn from 'static/icons/icon-warn.png';
 import iconError from 'static/icons/icon-error.png';
 import iconHelp from 'static/icons/icon-help.png';
 import JrButton from './JrButton';
-import './style/modal';
+import './style/confirm.less';
 
 const preCls = 'jerry-modal';
 
