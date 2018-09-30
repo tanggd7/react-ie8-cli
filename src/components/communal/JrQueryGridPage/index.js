@@ -31,7 +31,6 @@ class JrQueryGridPage extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.selectRows = [];
     this.currentPage = 1;
     this.form = {};
   }
@@ -44,11 +43,13 @@ class JrQueryGridPage extends Component {
   onSearchClick = form => {
     this.form = form;
     this.currentPage = 1;
+    this.gridObj.showLoading();
     this.loadData(1, this.pageSize, form);
   };
 
   // 刷新表格
   reloadGrid = () => {
+    this.gridObj.showLoading();
     this.loadData(this.currentPage, this.pageSize, this.form);
   };
 
@@ -57,8 +58,15 @@ class JrQueryGridPage extends Component {
     loadData(currentPage, pageSize, form);
   };
 
+  onCurrentPageOrSizeChange = (currentPage, pageSize) => {
+    this.pageSize = pageSize;
+    this.currentPage = currentPage;
+    const { loadData } = this.props;
+    loadData(currentPage, pageSize, this.form);
+  };
+
   // 获取选中行数据
-  getSelectRows = () => this.selectRows;
+  getSelectRows = () => this.gridObj.selectedRows();
 
   // 获取查询条件
   getConditions = () => this.form;
