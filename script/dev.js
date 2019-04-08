@@ -13,7 +13,7 @@ const paths = require('./paths');
 const clog = console.log;
 /* eslint-enable no-console */
 
-process.env.NODE_ENV = 'development';
+const publicPath = ''; // 不需要后面的斜杠
 
 const webpackConfig = webpackMerge(basicConfig, {
   entry: {
@@ -38,6 +38,30 @@ const webpackConfig = webpackMerge(basicConfig, {
     publicPath: '/', // 生成的打包文件引入 index.html 时会添加前缀。
   },
   devtool: 'cheap-module-source-map',
+  loaders: [
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      query: {
+        // 无刷新热更新
+        plugins: [
+          [
+            'react-transform',
+            {
+              transforms: [
+                {
+                  transform: 'react-transform-hmr',
+                  imports: ['react'],
+                  locals: ['module'],
+                },
+              ],
+            },
+          ],
+        ],
+      },
+    },
+  ],
   plugins: [
     // 复制静态资源到打包目录
     new CopyWebpackPlugin([{ from: 'public', ignore: ['index.html'] }], {
@@ -48,10 +72,12 @@ const webpackConfig = webpackMerge(basicConfig, {
       title: '首页',
       template: 'public/index.html', // 首页模板
       inject: true,
+      publicPath,
     }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
+        PUBLIC_PATH: JSON.stringify(publicPath),
       },
     }),
     // 当开启 HMR 的时候使用该插件会显示模块的相对路径

@@ -9,12 +9,11 @@ const basicConfig = {
       static: paths.appStatic,
       ui: paths.appCommunal,
       tool: paths.appTool,
+      hoc: paths.hoc,
     },
     modules: ['node_modules', paths.appSrc],
   },
-  externals: {
-    jquery: 'jQuery',
-  },
+  externals: {},
   module: {
     postLoaders: [
       {

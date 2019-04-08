@@ -6,6 +6,7 @@ module.exports = {
   appBuild: path.resolve(__dirname, '../build'),
   appDev: path.resolve(__dirname, '../dev'),
   appCommunal: path.resolve(__dirname, '../src/components/communal'),
+  hoc: path.resolve(__dirname, '../src/hoc'),
   appStatic: path.resolve(__dirname, '../src/static'),
   appTool: path.resolve(__dirname, '../src/tool'),
 };

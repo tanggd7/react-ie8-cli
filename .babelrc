@@ -11,23 +11,5 @@
     "react",
     "stage-0"
   ],
-  "plugins": ["add-module-exports"],
-  "env": {
-    "development": {
-      "plugins": [
-        [
-          "react-transform",
-          {
-            "transforms": [
-              {
-                "transform": "react-transform-hmr",
-                "imports": ["react"],
-                "locals": ["module"]
-              }
-            ]
-          }
-        ]
-      ]
-    }
-  }
+  "plugins": ["add-module-exports", "transform-decorators-legacy"]
 }

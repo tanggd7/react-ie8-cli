@@ -1,13 +1,16 @@
-/**
-|--------------------------------------------------
-| 获取 IE 浏览器版本
-|--------------------------------------------------
-*/
+/*
+ * @Author: 汤国栋
+ * @Date: 2019-04-08 11:14:45
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-08 11:14:45
+ * 
+ * 获取 IE 浏览器版本
+ */
 export default () => {
   const { userAgent } = navigator; // 取得浏览器的 userAgent 字符串
   const isIE = userAgent.includes('compatible') && userAgent.includes('MSIE'); // 判断是否 IE 浏览器
   if (userAgent.includes('Edge') && !isIE) {
-    return 'edge'; // 判断是否 IE 的 Edge 浏览器
+    return 99; // 判断是否 IE 的 Edge 浏览器
   }
   if (userAgent.includes('Trident') && userAgent.includes('rv:11.0')) {
     return 11; // 判断是否 IE11 浏览器

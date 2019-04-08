@@ -16,7 +16,7 @@ const paths = require('./paths');
 const clog = console.log;
 /* eslint-enable no-console */
 
-process.env.NODE_ENV = 'production';
+const publicPath = '/f'; // 不需要后面的斜杠
 
 const webpackConfig = webpackMerge(basicConfig, {
   entry: {
@@ -35,7 +35,7 @@ const webpackConfig = webpackMerge(basicConfig, {
     path: paths.appBuild, // 导出文件位置
     filename: 'js/[name].[chunkhash:8].js', // 编译文件名称
     chunkFilename: 'js/async-[id]-[name].[chunkhash:8].js', // 异步加载模块名称
-    publicPath: '/', // 生成的打包文件引入 index.html 时会添加前缀。
+    publicPath: `${publicPath}/`, // 生成的打包文件引入 index.html 时会添加前缀。
   },
   // devtool: 'source-map',
   plugins: [
@@ -66,6 +66,7 @@ const webpackConfig = webpackMerge(basicConfig, {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+        PUBLIC_PATH: JSON.stringify(publicPath),
       },
     }),
     // 插件可以将公共的依赖模块提取到已有的入口模块中，或者提取到一个新生成的模块。
@@ -79,7 +80,7 @@ const webpackConfig = webpackMerge(basicConfig, {
     }),
     // 它会用新生成的index.html
     new HtmlWebpackPlugin({
-      title: '君睿在线平台运营系统',
+      title: '',
       template: 'public/index.html', // 首页模板
       inject: true,
       hash: true,
@@ -88,6 +89,7 @@ const webpackConfig = webpackMerge(basicConfig, {
         removeAttributeQuotes: true,
         removeComments: true,
       },
+      publicPath,
     }),
     // 打包可视化
     // new BundleAnalyzerPlugin(),
