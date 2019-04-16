@@ -1,19 +1,23 @@
-/**
- * @author 汤国栋 2018-09-18 10:18:41
- * @deprecated 选择下拉框组件
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-09-18 10:18:41
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:07:00
+ * 
+ * 选择下拉框组件
  */
 import React, { PropTypes } from 'react';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
-import './style/select';
+import '../style/gd-select.less';
 
-const JrSelect = props => {
+const GdSelect = props => {
   const { defaultValue, style, onChange, options } = props;
   return (
     <Select
       defaultValue={defaultValue}
       style={{ width: '100%', style }}
-      className="jerry-select"
+      className="gd-select"
       notFoundContent="无"
       optionFilterProp="children"
       optionLabelProp="children"
@@ -32,18 +36,18 @@ const JrSelect = props => {
   );
 };
 
-JrSelect.propTypes = {
+GdSelect.propTypes = {
   defaultValue: PropTypes.string,
   style: PropTypes.object,
   onChange: PropTypes.func,
   options: PropTypes.array,
 };
 
-JrSelect.defaultProps = {
+GdSelect.defaultProps = {
   defaultValue: '',
   style: Object.create(null),
   onChange: () => {},
   options: [],
 };
 
-export default JrSelect;
+export default GdSelect;

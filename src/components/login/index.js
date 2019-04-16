@@ -6,8 +6,8 @@ import { response } from 'tool';
 import './index.less';
 
 import logo from 'static/imgs/logo-big.png';
-import iconUser from 'static/icons/login-user.png';
-import iconPwd from 'static/icons/login-pwd.png';
+import iconUser from 'static/imgs/login-user.png';
+import iconPwd from 'static/imgs/login-pwd.png';
 
 class Login extends Component {
   constructor(props) {
@@ -20,7 +20,6 @@ class Login extends Component {
     form.validateFields(error => {
       if (!error) {
         // const { userCode, password } = value;
-
         response.push('desktop');
       }
     });

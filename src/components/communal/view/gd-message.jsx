@@ -1,15 +1,23 @@
+/*
+ * @Author: 汤国栋
+ * @Date: 2019-04-16 20:50:08
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 20:50:08
+ * 
+ * 轻提示
+ */
 import React from 'react';
 import Notification from 'rc-notification';
 import 'rc-notification/assets/index.css';
-import iconInfo from 'static/icons/icon-info.png';
-import iconSuccess from 'static/icons/icon-success.png';
-import iconWarn from 'static/icons/icon-warn.png';
-import iconError from 'static/icons/icon-error.png';
-import './style/message';
+import iconInfo from 'static/imgs/icon-info.png';
+import iconSuccess from 'static/imgs/icon-success.png';
+import iconWarn from 'static/imgs/icon-warn.png';
+import iconError from 'static/imgs/icon-error.png';
+import '../style/gd-message.less';
 
 let notification = null;
 if (!notification) {
-  Notification.newInstance({ prefixCls: 'jerry-message', style: {} }, n => {
+  Notification.newInstance({ prefixCls: 'gd-message', style: {} }, n => {
     notification = n;
   });
 }

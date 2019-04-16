@@ -1,18 +1,25 @@
+/*
+ * @Author: 汤国栋
+ * @Date: 2019-04-16 20:54:18
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:15:35
+ * 
+ * 查询条件
+ */
 import React, { Component, PropTypes } from 'react';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import 'rc-calendar/assets/index.css';
-import JrInput from '../JrInput';
-import JrSelect from '../JrSelect';
-import JrPanel from '../JrPanel';
-import JrButton from '../JrButton';
-import './index.less';
+import JrInput from '../../gd-input';
+import JrSelect from '../../gd-select';
+import JrPanel from '../../gd-panel';
+import '../index.less';
 
 const format = 'YYYY-MM-DD'; // 查询列表日期组件格式化格式
 const width = 200; // 查询列表表单宽度
 
-class Condition extends Component {
+export default class Condition extends Component {
   static propTypes = {
     conditions: PropTypes.array,
     advancedConditions: PropTypes.array,
@@ -110,13 +117,13 @@ class Condition extends Component {
       if ((index + 1) % 2 === 0) {
         const key = `condition-${index}`;
         return (
-          <div key={key} className="jerry-qg-cd-cell" style={cls}>
-            <span className="jerry-qg-cd-content-label">{pre.title}：</span>
-            <span className="jerry-qg-cd-content-span">
+          <div key={key} className="gd-qg-cd-cell" style={cls}>
+            <span className="gd-qg-cd-content-label">{pre.title}：</span>
+            <span className="gd-qg-cd-content-span">
               {this.renderForm(pre)}
             </span>
-            <span className="jerry-qg-cd-content-label">{current.title}：</span>
-            <span className="jerry-qg-cd-content-span">
+            <span className="gd-qg-cd-content-label">{current.title}：</span>
+            <span className="gd-qg-cd-content-span">
               {this.renderForm(current)}
             </span>
           </div>
@@ -128,9 +135,9 @@ class Condition extends Component {
       ) {
         const key = `condition-${index}`;
         return (
-          <div key={key} className="jerry-qg-cd-cell" style={cls}>
-            <span className="jerry-qg-cd-content-label">{current.title}：</span>
-            <span className="jerry-qg-cd-content-single">
+          <div key={key} className="gd-qg-cd-cell" style={cls}>
+            <span className="gd-qg-cd-content-label">{current.title}：</span>
+            <span className="gd-qg-cd-content-single">
               {this.renderForm(current)}
             </span>
           </div>
@@ -166,14 +173,16 @@ class Condition extends Component {
     const { onRefreshClick, advancedConditions } = this.props;
     const { switchCondition } = this.state;
     return (
-      <div className="jerry-qg-cd">
+      <div className="gd-qg-cd">
         <JrPanel
           bodyStyle={{ padding: 0 }}
           header={() => (
             <span>
               搜索条件
               {advancedConditions.length > 0 && (
-                <JrButton
+                <button
+                  className="btn"
+                  type="button"
                   onClick={() => {
                     this.switchCondition();
                   }}
@@ -182,26 +191,30 @@ class Condition extends Component {
                     {switchCondition ? '- ' : '+ '}
                   </span>
                   高级搜索
-                </JrButton>
+                </button>
               )}
             </span>
           )}
           body={() => (
-            <div className="jerry-qg-cd-content">
+            <div className="gd-qg-cd-content">
               {this.createConditions()}
               {this.createAdvancedConditions()}
-              <div className="jerry-qg-cd-cell">
-                <div className="jerry-qg-cd-search">
-                  <JrButton
-                    className="jerry-qg-cd-btn"
-                    type="primary"
+              <div className="gd-qg-cd-cell">
+                <div className="gd-qg-cd-search">
+                  <button
+                    className="btn btn-primary gd-qg-cd-btn"
+                    type="button"
                     onClick={this.search}
                   >
                     查&nbsp;&nbsp;询
-                  </JrButton>
-                  <JrButton className="jerry-qg-cd-a" onClick={onRefreshClick}>
+                  </button>
+                  <button
+                    className="btn gd-qg-cd-a"
+                    type="button"
+                    onClick={onRefreshClick}
+                  >
                     刷&nbsp;&nbsp;新
-                  </JrButton>
+                  </button>
                 </div>
               </div>
             </div>
@@ -211,5 +224,3 @@ class Condition extends Component {
     );
   }
 }
-
-export default Condition;

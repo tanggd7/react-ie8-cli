@@ -1,27 +1,29 @@
-import Input from './JrInput';
-import Button from './JrButton';
-import Checkbox from './JrCheckbox';
-import Dialog from './JrDialog';
-import Form from './JrForm';
-import Message from './JrMessage';
-import Confirm from './JrConfirm';
-import Panel from './JrPanel';
-import Tree from './JrTree';
-import Editor from './JrEditor';
-import Upload from './JrUpload';
-import Grid from './JrGrid';
-import QueryGridPage from './JrQueryGridPage';
+/*
+ * @Author: 汤国栋
+ * @Date: 2019-04-11 19:44:12
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:01:11
+ * 
+ * 自定义组件
+ */
+import Input from './view/gd-input';
+import Checkbox from './view/gd-checkbox';
+import Select from './view/gd-select';
+import Dialog from './view/gd-dialog';
+import Confirm from './view/gd-confirm';
+import Message from './view/gd-message';
+import Panel from './view/gd-panel';
+import Grid from './view/gd-grid';
+import QueryGridPage from './view/gd-query-grid-page';
+import Tree from './view/gd-tree';
 
-export const JrInput = Input;
-export const JrButton = Button;
-export const JrCheckbox = Checkbox;
-export const JrDialog = Dialog;
-export const JrForm = Form;
-export const JrMessage = Message;
-export const JrConfirm = Confirm;
-export const JrPanel = Panel;
-export const JrTree = Tree;
-export const JrEditor = Editor;
-export const JrUpload = Upload;
-export const JrGrid = Grid;
-export const JrQueryGridPage = QueryGridPage;
+export const GdInput = Input;
+export const GdCheckbox = Checkbox;
+export const GdSelect = Select;
+export const GdDialog = Dialog;
+export const GdConfirm = Confirm;
+export const GdMessage = Message;
+export const GdPanel = Panel;
+export const GdGrid = Grid;
+export const GdQueryGridPage = QueryGridPage;
+export const GdTree = Tree;

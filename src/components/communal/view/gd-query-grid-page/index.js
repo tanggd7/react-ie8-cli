@@ -1,14 +1,18 @@
-/**
- * @author 汤国栋 2018-09-17 14:50:31
- * @deprecated 查询列表组件（查询条件、工具栏、表格列表）
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-09-17 14:50:31
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:09:50
+ * 
+ * 查询列表组件（查询条件、工具栏、表格列表）
  */
 import React, { Component, PropTypes } from 'react';
-import Condition from './condition';
-import Toolbar from './toolbar';
-import JrGrid from '../JrGrid';
+import Condition from './view/condition';
+import Toolbar from './view/toolbar';
+import GdGrid from '../gd-grid';
 import './index.less';
 
-class JrQueryGridPage extends Component {
+export default class GdQueryGridPage extends Component {
   static propTypes = {
     columns: PropTypes.array.isRequired, // 表格参数
     data: PropTypes.array.isRequired, // 表格数据
@@ -97,7 +101,7 @@ class JrQueryGridPage extends Component {
           getSelectRows={this.getSelectRows}
           getConditions={this.getConditions}
         />
-        <JrGrid
+        <GdGrid
           onInit={this.onInitGrid}
           currentPage={this.currentPage}
           total={total}
@@ -111,5 +115,3 @@ class JrQueryGridPage extends Component {
     );
   }
 }
-
-export default JrQueryGridPage;

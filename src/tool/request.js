@@ -2,12 +2,12 @@
  * @Author: 汤国栋
  * @Date: 2019-04-08 11:19:50
  * @Last Modified by: 汤国栋
- * @Last Modified time: 2019-04-08 11:37:34
+ * @Last Modified time: 2019-04-16 21:07:47
  * 
  * 封装的异步请求函数
  */
 import axios from 'axios';
-import { JrMessage } from 'ui';
+import { GdMessage } from 'ui';
 import { SUCCESS } from './http-code';
 import response from './response';
 import { clearStorage } from './util';
@@ -35,7 +35,7 @@ const newRequest = (url, params, method, error = false) =>
           response.push('/');
         } else if (code !== SUCCESS) {
           if (!error) {
-            JrMessage.error(message);
+            GdMessage.error(message);
           } else {
             reject(data);
           }
@@ -45,7 +45,7 @@ const newRequest = (url, params, method, error = false) =>
       })
       .catch(err => {
         if (err.code === AJAX_TIMEOUT) {
-          JrMessage.error('请求超时，请重试');
+          GdMessage.error('请求超时，请重试');
         }
         reject(err);
       });

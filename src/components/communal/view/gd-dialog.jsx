@@ -1,14 +1,17 @@
-/**
- * @author 方磊 2018-05-03
- * @deprecated 对话框组件
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-05-03 20:25:07
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:06:21
+ * 
+ * 对话框组件
  */
 import React, { Component, PropTypes } from 'react';
 import Dialog from 'rc-dialog';
-import Button from './JrButton';
 import 'rc-dialog/assets/index.css';
-import './style/dialog.less';
+import '../style/gd-dialog.less';
 
-class JrDialog extends Component {
+class GdDialog extends Component {
   static propTypes = {
     visible: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -103,13 +106,21 @@ class JrDialog extends Component {
           afterClose={afterClose}
           footer={
             (!!onOk || !!onCancel) && (
-              <div className="jerry-dialog-footer">
+              <div className="gd-dialog-footer">
                 {!!onOk && (
-                  <Button type="primary" onClick={onOk}>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={onOk}
+                  >
                     {okText}
-                  </Button>
+                  </button>
                 )}
-                {!!onCancel && <Button onClick={onCancel}>{cancelText}</Button>}
+                {!!onCancel && (
+                  <button className="btn" type="button" onClick={onCancel}>
+                    {cancelText}
+                  </button>
+                )}
               </div>
             )
           }
@@ -121,4 +132,4 @@ class JrDialog extends Component {
   }
 }
 
-export default JrDialog;
+export default GdDialog;

@@ -1,9 +1,15 @@
+/*
+ * @Author: 汤国栋
+ * @Date: 2019-04-16 20:54:41
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 20:55:27
+ * 
+ * 功能栏
+ */
 import React, { Component, PropTypes } from 'react';
-import { request, apiUrl } from 'tool';
-import JrMessage from '../JrMessage';
-import JrButton from '../JrButton';
+import JrMessage from '../../gd-message';
 
-const { MENU_USERMENU_BUTTONS } = apiUrl;
+// const { MENU_USERMENU_BUTTONS } = apiUrl;
 
 // 工具栏组件默认 state
 const defaultToolbarState = {
@@ -13,9 +19,9 @@ const defaultToolbarState = {
   param: {}, // toolbar 文件中设置的 params 参数
 };
 
-class Toolbar extends Component {
+export default class Toolbar extends Component {
   static propTypes = {
-    menucode: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    // menucode: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     toolbar: PropTypes.array,
     reloadGrid: PropTypes.func,
     getSelectRows: PropTypes.func,
@@ -23,7 +29,7 @@ class Toolbar extends Component {
   };
 
   static defaultProps = {
-    menucode: '',
+    // menucode: '',
     toolbar: [],
     reloadGrid: () => {},
     getSelectRows: () => {},
@@ -36,28 +42,29 @@ class Toolbar extends Component {
   }
 
   componentWillMount = () => {
-    const { menucode, toolbar } = this.props;
-    // 如果传入 menucode 则查询接口查看当前用户能显示出的按钮。
-    if (!!menucode && !!toolbar) {
-      request.get(MENU_USERMENU_BUTTONS(menucode)).then(({ entity }) => {
-        const allUserToolCodes = new Map(
-          entity.map(value => [value.buttoncode, value.buttonname])
-        );
+    const { toolbar } = this.props;
+    this.setState({ toolbar });
+    // // 如果传入 menucode 则查询接口查看当前用户能显示出的按钮。
+    // if (!!menucode && !!toolbar) {
+    //   request.get(MENU_USERMENU_BUTTONS(menucode)).then(({ entity }) => {
+    //     const allUserToolCodes = new Map(
+    //       entity.map(value => [value.buttoncode, value.buttonname])
+    //     );
 
-        const userToolbar = [];
-        toolbar.forEach(toolObj => {
-          if (allUserToolCodes.has(toolObj.code)) {
-            const obj = Object.assign({}, toolObj);
-            obj.title = allUserToolCodes.get(toolObj.code);
-            userToolbar.push(obj);
-          }
-        });
-        this.setState({ toolbar: userToolbar });
-      });
-    } else {
-      // 如果没有传入 menucode 就显示所有按钮
-      this.setState({ toolbar });
-    }
+    //     const userToolbar = [];
+    //     toolbar.forEach(toolObj => {
+    //       if (allUserToolCodes.has(toolObj.code)) {
+    //         const obj = Object.assign({}, toolObj);
+    //         obj.title = allUserToolCodes.get(toolObj.code);
+    //         userToolbar.push(obj);
+    //       }
+    //     });
+    //     this.setState({ toolbar: userToolbar });
+    //   });
+    // } else {
+    //   // 如果没有传入 menucode 就显示所有按钮
+    //   this.setState({ toolbar });
+    // }
   };
 
   // 销毁按钮组件
@@ -71,13 +78,14 @@ class Toolbar extends Component {
     const { visible, toolbar, MyDialog, title, params } = this.state;
     return (
       !!toolbar && (
-        <div className="jerry-qg-toolbar">
+        <div className="gd-qg-toolbar">
           {toolbar.map((curr, index) => {
             const key = `toolbar-${index}`;
             return (
-              <JrButton
+              <button
                 key={key}
-                type="info"
+                className="btn btn-info"
+                type="button"
                 onClick={() => {
                   const selectRows = getSelectRows();
                   // 根据 toolbar 中的 single 参数判断用户选择的记录数量是否符合要求。
@@ -111,7 +119,7 @@ class Toolbar extends Component {
                 }}
               >
                 {curr.title}
-              </JrButton>
+              </button>
             );
           })}
           {visible &&
@@ -130,5 +138,3 @@ class Toolbar extends Component {
     );
   }
 }
-
-export default Toolbar;
