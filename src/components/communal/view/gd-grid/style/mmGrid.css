@@ -12,8 +12,8 @@
   text-align: left;
 }
 
-.mmGrid input[type="radio"],
-.mmGrid input[type="checkbox"] {
+.mmGrid input[type='radio'],
+.mmGrid input[type='checkbox'] {
   margin: 0;
 }
 
@@ -31,7 +31,7 @@
 /* 半透明 */
 .mmGrid .mmg-transparent {
   /* IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
   /* IE 5-7 */
   filter: alpha(opacity=50);
   /* Netscape */
@@ -53,7 +53,7 @@
   margin: 5px auto;
   width: 32px;
   height: 32px;
-  background: url(img/loading.gif) no-repeat center center;
+  background: url(../img/loading.gif) no-repeat center center;
 }
 
 .mmGrid .mmg-loading .mmg-loadingText {
@@ -148,13 +148,13 @@
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  background: url(img/sort-asc.png) no-repeat center center;
+  background: url(../img/sort-asc.png) no-repeat center center;
 }
 .mmGrid .mmg-headWrapper .mmg-head th .mmg-titleWrapper .mmg-desc {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  background: url(img/sort-desc.png) no-repeat center center;
+  background: url(../img/sort-desc.png) no-repeat center center;
 }
 .mmGrid .mmg-colResizePointer {
   position: absolute;
@@ -182,10 +182,10 @@
 .mmGrid .mmg-backboard {
   position: relative;
   display: none;
-  background-image: url(img/furley_bg.png);
+  background-image: url(../img/furley_bg.png);
   background-image: -webkit-image-set(
-    url(img/furley_bg.png) 1x,
-    url(img/furley_bg_@2X.png) 2x
+    url(../img/furley_bg.png) 1x,
+    url(../img/furley_bg_@2X.png) 2x
   );
   -webkit-box-shadow: inset 0 0 2px 1px #d9d9d9;
   -moz-box-shadow: inset 0 0 2px 1px #d9d9d9;
@@ -279,7 +279,7 @@
   display: block;
   width: 50px;
   height: 20px;
-  background: #fff url(img/arrow_down.png) no-repeat center center;
+  background: #fff url(../img/arrow_down.png) no-repeat center center;
   border: 1px solid #ccc;
   border-top: 0;
   -webkit-border-radius: 2px;
@@ -299,7 +299,7 @@
   display: block;
   width: 50px;
   height: 20px;
-  background: #fff url(img/arrow_up.png) no-repeat center center;
+  background: #fff url(../img/arrow_up.png) no-repeat center center;
   border: 1px solid #ccc;
   border-bottom: 0;
   -webkit-border-radius: 2px;

@@ -3,7 +3,7 @@ import Menu, { Item as MenuItem } from 'rc-menu';
 import 'rc-menu/assets/index.css';
 // import { JrButton } from 'ui';
 
-// import flexMenu from 'static/icons/flex-menu.png';
+// import flexMenu from 'static/imgs/flex-menu.png';
 import Logo from 'static/imgs/logo-vn.png';
 
 const children1 = [

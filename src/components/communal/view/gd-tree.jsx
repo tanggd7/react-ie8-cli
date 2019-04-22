@@ -1,16 +1,17 @@
-/**
- * @author 方磊 2018-05-29
- * @deprecated ztree封装
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-05-29 20:59:51
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:07:16
+ * 
+ * ztree
  */
-
 import React, { Component, PropTypes } from 'react';
 import 'ztree';
 import 'ztree/css/zTreeStyle/zTreeStyle.css';
-import './style/tree.less';
-/* eslint import/no-extraneous-dependencies: 0 */
-import jquery from 'jquery';
+import '../style/gd-tree.less';
 
-export default class JrTree extends Component {
+export default class GdTree extends Component {
   static propTypes = {
     id: PropTypes.string, // ztree 在 html 中 id
     // onClick: PropTypes.func, // 节点点击事件
@@ -74,8 +75,8 @@ export default class JrTree extends Component {
           chkboxType,
         },
       };
-      this.treeObj = jquery.fn.zTree.init(
-        jquery(`#${this.treeId}`),
+      this.treeObj = jQuery.fn.zTree.init(
+        jQuery(`#${this.treeId}`),
         setting,
         zTreeNodes
       );

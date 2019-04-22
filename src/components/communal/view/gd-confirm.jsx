@@ -1,21 +1,24 @@
-/**
- * @author 汤国栋 2018-09-18 11:29:39
- * @deprecated 询问框
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-09-18 11:29:39
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 21:05:54
+ * 
+ * 询问框
  */
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Dialog from 'rc-dialog';
-import iconInfo from 'static/icons/icon-info.png';
-import iconSuccess from 'static/icons/icon-success.png';
-import iconWarn from 'static/icons/icon-warn.png';
-import iconError from 'static/icons/icon-error.png';
-import iconHelp from 'static/icons/icon-help.png';
-import JrButton from './JrButton';
-import './style/confirm.less';
+import iconInfo from 'static/imgs/icon-info.png';
+import iconSuccess from 'static/imgs/icon-success.png';
+import iconWarn from 'static/imgs/icon-warn.png';
+import iconError from 'static/imgs/icon-error.png';
+import iconHelp from 'static/imgs/icon-help.png';
+import '../style/gd-confirm.less';
 
-const preCls = 'jerry-modal';
+const preCls = 'gd-modal';
 
-class JrConfirm extends Component {
+class GdConfirm extends Component {
   static propTypes = {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -86,13 +89,21 @@ class JrConfirm extends Component {
             <div className={`${preCls}-content`}>{content}</div>
           </div>
           <div className={`${preCls}-btns`}>
-            <JrButton type="primary" onClick={() => this.destroyDialog(onOk)}>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={() => this.destroyDialog(onOk)}
+            >
               确定
-            </JrButton>
+            </button>
             {hasCancel && (
-              <JrButton onClick={() => this.destroyDialog(onCancel)}>
+              <button
+                className="btn"
+                type="button"
+                onClick={() => this.destroyDialog(onCancel)}
+              >
                 取消
-              </JrButton>
+              </button>
             )}
           </div>
         </div>
@@ -113,7 +124,7 @@ const createConfirm = config => {
   // };
 
   const render = props => {
-    ReactDOM.render(<JrConfirm {...props} />, div);
+    ReactDOM.render(<GdConfirm {...props} />, div);
   };
   render({ ...config });
 };

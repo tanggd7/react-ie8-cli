@@ -1,20 +1,23 @@
-/**
- * @author 汤国栋 2018-09-11 08:41:02
- * @deprecated 表格组件
+/*
+ * @Author: 汤国栋
+ * @Date: 2018-09-11 08:41:02
+ * @Last Modified by: 汤国栋
+ * @Last Modified time: 2019-04-16 20:49:47
+ * 
+ * 表格
+ * 插件网站：http://www.jq22.com/demo/mmGrid-master20150916/examples/index.html
  */
-/* eslint import/no-extraneous-dependencies: 0 */
 import React, { Component, PropTypes } from 'react';
-import jquery from 'jquery';
-import MMGrid from './mmGrid';
-import MMPaginator from './mmPaginator';
+import MMGrid from './view/mm-grid';
+import MMPaginator from './view/mm-paginator';
 
-import './mmGrid.css';
-import './mmPaginator.css';
+import './style/mmGrid.css';
+import './style/mmPaginator.css';
 
-MMGrid(jquery); // 初始化表格
-MMPaginator(jquery); // 初始化分页
+MMGrid(jQuery); // 初始化表格
+MMPaginator(jQuery); // 初始化分页
 
-class JrGrid extends Component {
+export default class JrGrid extends Component {
   static propTypes = {
     cols: PropTypes.array.isRequired, // 表格参数
     data: PropTypes.array.isRequired, // 表格数据
@@ -88,7 +91,7 @@ class JrGrid extends Component {
     };
     if (showPagination) {
       config.plugins = [
-        jquery(`#${pgId}`).mmPaginator({
+        jQuery(`#${pgId}`).mmPaginator({
           page: currentPage,
           local: true,
           totalCount: total,
@@ -105,7 +108,7 @@ class JrGrid extends Component {
         }),
       ];
     }
-    const tableObj = jquery(`#${tableId}`).mmGrid(config);
+    const tableObj = jQuery(`#${tableId}`).mmGrid(config);
 
     // 初始化后，返回表操作方法。
     onInit(tableObj);
@@ -145,5 +148,3 @@ class JrGrid extends Component {
     );
   }
 }
-
-export default JrGrid;
