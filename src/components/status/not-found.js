@@ -2,13 +2,12 @@
  * @Author: 汤国栋
  * @Date: 2019-04-11 19:31:44
  * @Last Modified by: 汤国栋
- * @Last Modified time: 2019-04-11 19:56:45
+ * @Last Modified time: 2019-06-13 22:35:36
  * 
  * 404 页面
  */
 import React from 'react';
 import { response } from 'tool';
-import { GdCheckbox } from 'ui';
 import './index.less';
 
 const NotFound = () => (
@@ -24,7 +23,6 @@ const NotFound = () => (
     >
       返 回
     </button>
-    <GdCheckbox>123123</GdCheckbox>
   </div>
 );
 

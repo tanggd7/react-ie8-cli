@@ -16,7 +16,7 @@ export default class Header extends Component {
             <span>
               <img src={Logo} alt="" />
             </span>
-            <span className="title">工业底片数字化智能云平台</span>
+            <span className="title">XXXXXXXX管理平台</span>
           </div>
           <div className="right_link">
             <span>

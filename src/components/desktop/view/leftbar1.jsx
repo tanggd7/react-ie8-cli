@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { JrTree } from 'ui';
+import { GdTree } from 'ui';
 // import { apiUrl, request } from 'tool';
 import { tabChange, activeKeyChange } from '../ducks';
 
@@ -130,7 +130,7 @@ class Leftbar extends Component {
             <div className="title">菜单列表</div>
             <div className="menu_list">
               {menuNodes.length > 0 && (
-                <JrTree nodes={menuNodes} onClick={this.onRbSelect} />
+                <GdTree nodes={menuNodes} onClick={this.onRbSelect} />
               )}
             </div>
           </div>

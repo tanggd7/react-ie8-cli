@@ -9,7 +9,9 @@
       "ui": ["./src/components/communal/index"],
       "ui/*": ["./src/components/communal/*"],
       "tool": ["./src/tool/index"],
-      "tool/*": ["./src/tool/*"]
+      "tool/*": ["./src/tool/*"],
+      "hoc": ["./src/hoc/index"],
+      "hoc/*": ["./src/hoc/*"]
     }
   },
   "exclude": ["node_modules", "build"],

@@ -2,6 +2,7 @@
   "path-intellisense.mappings": {
     "static": "${workspaceRoot}/src/static",
     "ui": "${workspaceRoot}/src/components/communal",
-    "tool": "${workspaceRoot}/src/tool"
+    "tool": "${workspaceRoot}/src/tool",
+    "hoc": "${workspaceRoot}/src/hoc"
   }
 }

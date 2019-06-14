@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { createForm } from 'rc-form';
-import { JrInput, JrButton, JrCheckbox } from 'ui';
+import { GdInput, GdCheckbox } from 'ui';
 import { response } from 'tool';
+import { GetRouteLocation } from 'hoc';
 import './index.less';
 
 import logo from 'static/imgs/logo-big.png';
 import iconUser from 'static/imgs/login-user.png';
 import iconPwd from 'static/imgs/login-pwd.png';
 
+@GetRouteLocation
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,7 @@ class Login extends Component {
         <div className="login-form">
           <div className="login-form-div">
             <img className="login-icon" src={iconUser} alt="" />
-            <JrInput
+            <GdInput
               className="login-input"
               {...getFieldProps('userCode', {
                 rules: [{ required: true, message: `用户名必填` }],
@@ -59,7 +61,7 @@ class Login extends Component {
           </div>
           <div className="login-form-div">
             <img className="login-icon" src={iconPwd} alt="" />
-            <JrInput
+            <GdInput
               className="login-input"
               {...getFieldProps('password', {
                 rules: [{ required: true, message: `密码必填` }],
@@ -70,15 +72,15 @@ class Login extends Component {
             <b>{this.getError('password')}</b>
           </div>
           <div className="login-wapper">
-            <JrCheckbox onChange={this.remember}>记住密码</JrCheckbox>
+            <GdCheckbox onChange={this.remember}>记住密码</GdCheckbox>
             &nbsp;&nbsp;
             <Link to="/forget" className="login-forget">
               忘记密码
             </Link>
           </div>
-          <JrButton onClick={this.submit} className="login-btn" type="primary">
+          <button onClick={this.submit} className="btn" type="button">
             登录
-          </JrButton>
+          </button>
         </div>
       </div>
     );

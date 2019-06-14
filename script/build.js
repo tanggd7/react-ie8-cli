@@ -10,11 +10,10 @@ const basicConfig = require('./basic');
 const creatCompiler = require('./config/webpackCompiler');
 const paths = require('./paths');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//   .BundleAnalyzerPlugin;
+//   .BundleAnalyzerPlugin; // 打包可视化
 
-/* eslint-disable no-console */
+// eslint-disable-next-line no-console
 const clog = console.log;
-/* eslint-enable no-console */
 
 const publicPath = '/f'; // 不需要后面的斜杠
 
